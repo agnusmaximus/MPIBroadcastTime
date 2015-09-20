@@ -4,8 +4,6 @@
 #include <mpi.h>
 #include <sys/time.h>
 
-#define SCATTER_ARRAY_SZ 10000
-
 using namespace std;
 
 long long int get_time() {
