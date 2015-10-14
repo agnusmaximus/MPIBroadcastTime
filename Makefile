@@ -16,5 +16,5 @@ compare:
 	rm -f multichunk_output
 	for i in `seq 1 $(N_RUNS)`; do mpirun -np $(N_PROCS) ./singlechunk >> singlechunk_output; done
 	for i in `seq 1 $(N_RUNS)`; do mpirun -np $(N_PROCS) ./multichunk >> multichunk_output; done
-	more singlechunk_output | grep "TIME ELAPSED: " | grep -oEi '[0-9]+' | awk 'NR == 1 { max=$$1; min=$$1; sum=0 } { if ($$1>max) max=$$1; if ($$1<min) min=$$1; sum+=$$1;} END {printf "Min: %d\tMax: %d\tAverage: %f\n", min, max, sum/NR}'
-	more multichunk_output | grep "TIME ELAPSED: " | grep -oEi '[0-9]+' | awk 'NR == 1 { max=$$1; min=$$1; sum=0 } { if ($$1>max) max=$$1; if ($$1<min) min=$$1; sum+=$$1;} END {printf "Min: %d\tMax: %d\tAverage: %f\n", min, max, sum/NR}'
+	more singlechunk_output | grep "TIME ELAPSED: " | grep -oEi '[0-9]+' | awk 'NR == 1 { max=$$1; min=$$1; sum=0 } { if ($$1>max) max=$$1; if ($$1<min) min=$$1; sum+=$$1;} END {printf "Min: %d\tMax: %d\tAverage: %f\n", min, max, sum/NR}' > broadcast_${N_PROCS}_procs
+	more multichunk_output | grep "TIME ELAPSED: " | grep -oEi '[0-9]+' | awk 'NR == 1 { max=$$1; min=$$1; sum=0 } { if ($$1>max) max=$$1; if ($$1<min) min=$$1; sum+=$$1;} END {printf "Min: %d\tMax: %d\tAverage: %f\n", min, max, sum/NR}' > scatter_${N_PROCS}_procs
